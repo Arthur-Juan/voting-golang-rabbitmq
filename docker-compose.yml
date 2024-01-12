@@ -1,0 +1,49 @@
+version: '3.9'
+
+
+services:
+
+  db:
+    container_name: db
+    image: postgres:12
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: almosso
+    ports:
+      - "5432:5432"
+    expose:
+      - 5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  
+  broker:
+    container_name: rabbitmq
+    image: rabbitmq:3-management-alpine
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ./volumes/rabbitmq/data/:/var/lib/rabbitmq/
+      - ./volumes/rabbitmq/log/:/var/log/rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+
+  api:
+    container_name: api
+    build: .
+    volumes:
+      - ./uploads:/go/app/uploads
+    environment:
+        DATABASE_URL: "host=db user=postgres password=postgres dbname=almosso sslmode=disable"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+      - broker
+
+
+
+volumes:  
+  pgdata: {}
