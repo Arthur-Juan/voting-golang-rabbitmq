@@ -1,7 +1,13 @@
 package types
 
+import "gorm.io/gorm"
+
 type Vote struct {
-	Voter    User
-	Category Category
-	Target   User
+	gorm.Model
+	Voter      *User
+	VoterId    uint
+	Category   *Category
+	CategoryId uint
+	Target     *User
+	TargetId   uint
 }

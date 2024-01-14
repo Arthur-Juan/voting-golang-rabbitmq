@@ -1,6 +1,6 @@
 package types
 
-type Candidate struct {
-	User     User
+type Candidate struct{
+	User User
 	Category Category
 }
