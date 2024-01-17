@@ -1,6 +1,7 @@
 package token
 
 import (
+	"errors"
 	"time"
 
 	"github.com/arthur-juan/voting-golang-rabbitmq/config"
@@ -34,4 +35,20 @@ func GenerateToken(user *types.User) (string, error) {
 
 	return token, nil
 
+}
+
+func CheckToken(token string) (Claims, error) {
+	var claims Claims
+	jwtToken, err := jwt.ParseWithClaims(token, &claims, func(token *jwt.Token) (interface{}, error) {
+		return []byte(config.GetKey()), nil
+	})
+
+	if err != nil {
+		return claims, err
+	}
+	if !jwtToken.Valid {
+		return claims, errors.New("unauthorized")
+	}
+
+	return claims, nil
 }
