@@ -1,6 +1,7 @@
 package middlewares
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/arthur-juan/voting-golang-rabbitmq/pkg/token"
@@ -9,6 +10,7 @@ import (
 
 func CheckAuth(ctx *fiber.Ctx) error {
 	tokenString := ctx.Get("Authorization")
+	fmt.Println(tokenString)
 	if tokenString == "" {
 		return ctx.Status(http.StatusForbidden).JSON(fiber.Map{
 			"msg": "Forbidden",

@@ -14,8 +14,9 @@ type Category struct {
 	Creator     *User
 	CreatorId   uint
 	End         time.Time
-	Admins      []*User `gorm:"many2many:admin_category;"`
-	Candidates  []*User `gorm:"many2many:canditate_category;"`
+	Capacity    uint
+	Admins      []*User `gorm:"many2many:admin_categories;"`
+	Candidates  []*User `gorm:"many2many:canditate_categories;"`
 }
 
 func NewCategory(name, description string, end time.Time, creator *User) (*Category, error) {
