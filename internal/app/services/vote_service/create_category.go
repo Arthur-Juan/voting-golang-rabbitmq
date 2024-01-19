@@ -1,6 +1,8 @@
 package voteservice
 
-import "github.com/arthur-juan/voting-golang-rabbitmq/internal/app/types"
+import (
+	"github.com/arthur-juan/voting-golang-rabbitmq/internal/app/types"
+)
 
 func (s *VoteService) CreateCategory(input *types.CreateCategoryInput, user_id uint) error {
 	var user *types.User

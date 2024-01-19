@@ -11,7 +11,7 @@ func CreateCategory(ctx *fiber.Ctx) error {
 	var input *types.CreateCategoryInput
 	ctx.BodyParser(&input)
 
-	id := ctx.Locals("id").(uint)
+	id := uint(ctx.Locals("userId").(uint64))
 
 	voteservice := voteservice.NewVoteService()
 
