@@ -11,7 +11,7 @@ func (s *VoteService) CreateCategory(input *types.CreateCategoryInput, user_id u
 		return err
 	}
 
-	category, err := types.NewCategory(input.Name, input.Description, input.End, user)
+	category, err := types.NewCategory(input.Name, input.Description, input.End, user, input.Winners)
 	if err != nil {
 		return err
 	}

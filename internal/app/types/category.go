@@ -14,12 +14,12 @@ type Category struct {
 	Creator     *User
 	CreatorId   uint
 	End         time.Time
-	Capacity    uint
+	Winners     uint
 	Admins      []*User `gorm:"many2many:admin_categories;"`
 	Candidates  []*User `gorm:"many2many:canditate_categories;"`
 }
 
-func NewCategory(name, description string, end time.Time, creator *User) (*Category, error) {
+func NewCategory(name, description string, end time.Time, creator *User, winners int) (*Category, error) {
 
 	if name == "" {
 		return nil, errors.New("name is required")
@@ -39,6 +39,10 @@ func NewCategory(name, description string, end time.Time, creator *User) (*Categ
 		return nil, errors.New("end date cannot be minor then now")
 	}
 
+	if winners <= 0 {
+		return nil, errors.New("winner cannot be minor then 0")
+	}
+
 	if creator == nil {
 		return nil, errors.New("creator is required")
 	}
@@ -47,6 +51,7 @@ func NewCategory(name, description string, end time.Time, creator *User) (*Categ
 		Description: description,
 		End:         end,
 		Creator:     creator,
+		Winners:     uint(winners),
 	}, nil
 }
 
@@ -54,4 +59,5 @@ type CreateCategoryInput struct {
 	Name        string    `json:"name"`
 	Description string    `json:"description"`
 	End         time.Time `json:"end"`
+	Winners     int       `json:"winners"`
 }
