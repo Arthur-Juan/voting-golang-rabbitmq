@@ -35,7 +35,7 @@ func NewCategory(name, description string, end time.Time, creator *User, winners
 
 	now := time.Now()
 
-	if end.After(now) {
+	if end.Before(now) {
 		return nil, errors.New("end date cannot be minor then now")
 	}
 
@@ -60,4 +60,13 @@ type CreateCategoryInput struct {
 	Description string    `json:"description"`
 	End         time.Time `json:"end"`
 	Winners     int       `json:"winners"`
+}
+
+type CategoryOutput struct {
+	ID          uint      `json:"id"`
+	Name        string    `json:"name"`
+	Description string    `json:"description"`
+	End         time.Time `json:"end"`
+	Winners     int       `json:"total_winners"`
+	Status      string    `json:"status"`
 }

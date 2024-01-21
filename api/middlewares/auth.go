@@ -22,7 +22,10 @@ func CheckAuth(ctx *fiber.Ctx) error {
 	}
 
 	token, err := token.CheckToken(tokenString)
+	fmt.Println("im here")
 	if err != nil {
+		fmt.Printf("fk get error %s\n", err)
+
 		return ctx.Status(http.StatusInternalServerError).JSON(fiber.Map{
 			"msg": err,
 		})

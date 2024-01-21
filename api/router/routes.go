@@ -25,5 +25,6 @@ func defineRoutes(router *fiber.App) {
 		auth.Use(jwtware.New(jwtware.Config{SigningKey: jwtware.SigningKey{Key: []byte(config.GetKey())}}))
 
 		auth.Post("/category", handler.CreateCategory)
+		auth.Get("/category", handler.ListCategory)
 	}
 }
