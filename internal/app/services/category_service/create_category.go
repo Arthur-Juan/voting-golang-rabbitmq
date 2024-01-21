@@ -1,10 +1,10 @@
-package voteservice
+package categoryservice
 
 import (
 	"github.com/arthur-juan/voting-golang-rabbitmq/internal/app/types"
 )
 
-func (s *VoteService) CreateCategory(input *types.CreateCategoryInput, user_id uint) error {
+func (s *CategoryService) CreateCategory(input *types.CreateCategoryInput, user_id uint) error {
 	var user *types.User
 
 	if err := s.db.Where("id = ?", user_id).First(&user).Error; err != nil {

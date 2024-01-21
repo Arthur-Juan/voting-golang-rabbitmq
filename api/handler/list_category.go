@@ -3,13 +3,12 @@ package handler
 import (
 	"fmt"
 
-	voteservice "github.com/arthur-juan/voting-golang-rabbitmq/internal/app/services/vote_service"
+	categoryservice "github.com/arthur-juan/voting-golang-rabbitmq/internal/app/services/category_service"
 	"github.com/gofiber/fiber/v2"
 )
 
 func ListCategory(ctx *fiber.Ctx) error {
-	fmt.Println("HEEEERE")
-	service := voteservice.NewVoteService()
+	service := categoryservice.NewCategoryService()
 	fmt.Println(service)
 	output, err := service.ListCategory()
 	if err != nil {

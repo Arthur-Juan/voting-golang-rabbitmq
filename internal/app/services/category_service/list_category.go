@@ -1,4 +1,4 @@
-package voteservice
+package categoryservice
 
 import (
 	"fmt"
@@ -7,7 +7,7 @@ import (
 	"github.com/arthur-juan/voting-golang-rabbitmq/internal/app/types"
 )
 
-func (s *VoteService) ListCategory() ([]*types.CategoryOutput, error) {
+func (s *CategoryService) ListCategory() ([]*types.CategoryOutput, error) {
 
 	var categories []types.Category
 

@@ -1,7 +1,7 @@
 package handler
 
 import (
-	voteservice "github.com/arthur-juan/voting-golang-rabbitmq/internal/app/services/vote_service"
+	categoryservice "github.com/arthur-juan/voting-golang-rabbitmq/internal/app/services/category_service"
 	"github.com/arthur-juan/voting-golang-rabbitmq/internal/app/types"
 	"github.com/gofiber/fiber/v2"
 )
@@ -13,9 +13,9 @@ func CreateCategory(ctx *fiber.Ctx) error {
 
 	id := uint(ctx.Locals("userId").(uint64))
 
-	voteservice := voteservice.NewVoteService()
+	categoryservice := categoryservice.NewCategoryService()
 
-	err := voteservice.CreateCategory(input, id)
+	err := categoryservice.CreateCategory(input, id)
 
 	if err != nil {
 		return err
