@@ -70,3 +70,8 @@ type CategoryOutput struct {
 	Winners     int       `json:"total_winners"`
 	Status      string    `json:"status"`
 }
+
+type InviteToCategoryInput struct {
+	CategoryId uint `json:"category_id"`
+	InviteType uint `json:"invite_type"`
+}

@@ -9,8 +9,7 @@ type CandidateCategory struct {
 }
 
 func (c *CandidateCategory) BeforeCreate(db *gorm.DB) error {
-	err := db.SetupJoinTable(&User{}, "Categories", &CandidateCategory{})
-	return err
+	return nil
 }
 
 type Status uint8

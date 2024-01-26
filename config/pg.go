@@ -15,7 +15,9 @@ func InitPg() (*gorm.DB, error) {
 		return nil, err
 	}
 
-	err = db.AutoMigrate(&types.User{}, &types.Category{}, &types.Vote{})
+	err = db.SetupJoinTable(&types.User{}, "Categories", &types.CandidateCategory{})
+
+	err = db.AutoMigrate(&types.User{}, &types.Category{}, &types.Vote{}, &types.CandidateCategory{})
 	if err != nil {
 		return nil, err
 	}
