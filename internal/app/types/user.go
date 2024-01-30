@@ -3,6 +3,7 @@ package types
 import (
 	"errors"
 	"fmt"
+	"net/mail"
 
 	"gorm.io/gorm"
 )
@@ -27,6 +28,12 @@ func NewUser(firstName, lastName, email, password string) (*User, error) {
 	}
 	if password == "" {
 		return nil, errors.New("password cannot be empty")
+	}
+
+	_, err := mail.ParseAddress(email)
+
+	if err != nil {
+		return nil, errors.New("invalid email")
 	}
 
 	return &User{
