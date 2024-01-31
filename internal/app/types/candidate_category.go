@@ -6,6 +6,8 @@ type CandidateCategory struct {
 	UserId     uint `gorm:"primaryKey"`
 	CategoryId uint `gorm:"primaryKey"`
 	Status     Status
+	User       User     `gorm:"foreignKey:UserId"`
+	Category   Category `gorm:"foreignKey:CategoryId"`
 }
 
 func (c *CandidateCategory) BeforeCreate(db *gorm.DB) error {
@@ -19,3 +21,8 @@ const (
 	Approved
 	Rejected
 )
+
+type CandidateCategoryOutput struct {
+	User     *User           `json:"user"`
+	Category *CategoryOutput `json:"category"`
+}

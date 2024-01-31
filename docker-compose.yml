@@ -9,7 +9,7 @@ services:
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
-      POSTGRES_DB: voting
+      POSTGRES_DB: almosso
     ports:
       - "5432:5432"
     expose:

@@ -16,7 +16,20 @@ func (s *CategoryService) CreateCategory(input *types.CreateCategoryInput, user_
 		return err
 	}
 
-	if err = s.db.Create(&category).Error; err != nil {
+	if err := s.db.Create(&category).Error; err != nil {
+		return err
+	}
+
+	if err := s.db.Preload("Admins").First(&category, category.ID).Error; err != nil {
+		return err
+	}
+
+	admin_category := types.CategoryAdmin{
+		UserId:     user.ID,
+		CategoryId: category.ID,
+	}
+
+	if err := s.db.Create(&admin_category).Error; err != nil {
 		return err
 	}
 
