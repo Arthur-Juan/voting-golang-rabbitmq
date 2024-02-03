@@ -12,3 +12,8 @@ type CategoryAdmin struct {
 func (c *CategoryAdmin) BeforeCreate(db *gorm.DB) error {
 	return nil
 }
+
+type GrantAdminAccessInput struct {
+	CategoryId int `json:"category_id"`
+	TargetId   int `json:"target_id"`
+}
