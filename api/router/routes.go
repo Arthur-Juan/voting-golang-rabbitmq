@@ -27,7 +27,7 @@ func defineRoutes(router *fiber.App) {
 		auth.Post("/category", handler.CreateCategory)
 		auth.Get("/category", handler.ListCategory)
 		auth.Post("/category/invite", handler.InviteToCategoryHandler)
+		auth.Post("/category/invite/approve", handler.ApproveInviteHandler)
 		auth.Get("/category/invite/:category_id", handler.ListInvitesHandler)
-
 	}
 }
