@@ -4,6 +4,7 @@ import (
 	"errors"
 	"time"
 
+	"github.com/gofiber/fiber/v2/log"
 	"gorm.io/gorm"
 )
 
@@ -34,7 +35,8 @@ func NewCategory(name, description string, end time.Time, creator *User, winners
 	}
 
 	now := time.Now()
-
+	now = now.Add(-3 * time.Hour)
+	log.Debug(end)
 	if end.Before(now) {
 		return nil, errors.New("end date cannot be minor then now")
 	}

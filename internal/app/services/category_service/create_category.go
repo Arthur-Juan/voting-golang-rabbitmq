@@ -2,6 +2,8 @@ package categoryservice
 
 import (
 	"github.com/arthur-juan/voting-golang-rabbitmq/internal/app/types"
+	"github.com/arthur-juan/voting-golang-rabbitmq/internal/app/worker"
+	"github.com/gofiber/fiber/v2/log"
 )
 
 func (s *CategoryService) CreateCategory(input *types.CreateCategoryInput, user_id uint) error {
@@ -32,6 +34,10 @@ func (s *CategoryService) CreateCategory(input *types.CreateCategoryInput, user_
 	if err := s.db.Create(&admin_category).Error; err != nil {
 		return err
 	}
+
+	log.Debug(category)
+	//start worker
+	go worker.Run(category.End)
 
 	return nil
 }

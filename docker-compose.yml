@@ -38,6 +38,7 @@ services:
     environment:
         DATABASE_URL: "host=db user=postgres password=postgres dbname=almosso sslmode=disable"
         QUEUE_URL: "amqp://guest:guest@broker:5672/"
+        WORKER_COUNT: 5
     ports:
       - "8080:8080"
     depends_on:
