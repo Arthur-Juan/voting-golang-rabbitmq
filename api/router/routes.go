@@ -32,5 +32,7 @@ func defineRoutes(router *fiber.App) {
 		auth.Get("/category/invite/:category_id", handler.ListInvitesHandler)
 
 		auth.Post("/category/invite/grant-admin", handler.GrantAdminHandler)
+
+		auth.Post("/vote", handler.VoteHandler)
 	}
 }

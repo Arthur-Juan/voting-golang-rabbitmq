@@ -8,6 +8,9 @@ type Vote struct {
 	VoterId    uint
 	Category   *Category
 	CategoryId uint
-	Target     *User
-	TargetId   uint
+}
+
+type VoteInput struct {
+	TargetId   uint `json:"target_id"`
+	CategoryId uint `json:"category_id"`
 }

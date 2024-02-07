@@ -6,6 +6,7 @@ import (
 	"github.com/arthur-juan/voting-golang-rabbitmq/internal/app/types"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 )
 
 func InitPg() (*gorm.DB, error) {
@@ -27,7 +28,9 @@ func InitPg() (*gorm.DB, error) {
 }
 
 func connect(dsn string, count int) (*gorm.DB, error) {
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
+		Logger: logger.Default.LogMode(logger.Info),
+	})
 	if err != nil {
 		if count < 3 {
 			count++
